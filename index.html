@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>マッサージ 楽～れ｜倉敷市玉島のリラクゼーションサロン</title>
+  <meta name="description" content="倉敷市玉島のリラクゼーションサロン「楽～れ」。肩こり・腰痛・足のだるさにお悩みの方へ。もみほぐし＋ストレッチ付きのオーダーメイド施術。30分3,000円・60分5,000円。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+JP:wght@400;600;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+      color: #2d2520;
+      background: #fdf9f5;
+      line-height: 1.85;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    :root {
+      --brown:   #7a5c4a;
+      --brown-d: #3e2a1e;
+      --gold:    #b8935a;
+      --sage:    #7e9e84;
+      --beige:   #f5ede3;
+      --beige-d: #e6d5c3;
+      --green:   #06c755;
+      --white:   #ffffff;
+      --sub:     #6b5a50;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: rgba(62, 42, 30, 0.92);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      border-bottom: 1px solid rgba(184,147,90,.25);
+    }
+    .logo { font-size: 1.05rem; font-weight: 700; color: var(--white); letter-spacing: 0.04em; }
+    .logo span { color: var(--gold); }
+    .header-right { display: flex; align-items: center; gap: 12px; }
+    .header-tel { font-size: 0.78rem; color: #cbb89a; }
+    .header-tel a { color: var(--gold); font-weight: 700; font-size: 0.95rem; }
+    .btn-reserve {
+      background: var(--gold); color: var(--brown-d);
+      font-weight: 700; font-size: 0.82rem;
+      padding: 8px 18px; border-radius: 30px; white-space: nowrap;
+    }
+
+    /* ===== HAMBURGER ===== */
+    .hamburger {
+      display: none;
+      background: none; border: none; cursor: pointer;
+      flex-direction: column; justify-content: center; gap: 5px;
+      padding: 4px; width: 32px; height: 32px;
+      flex-shrink: 0;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--white); border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+      transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ===== MOBILE NAV DRAWER ===== */
+    .mobile-nav {
+      display: none;
+      position: fixed; left: 0; right: 0;
+      top: 53px;
+      background: rgba(28, 14, 6, 0.98);
+      border-bottom: 1px solid rgba(184,147,90,.3);
+      z-index: 190;
+      flex-direction: column;
+      padding: 4px 0 16px;
+      box-shadow: 0 6px 24px rgba(0,0,0,.45);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      padding: 15px 24px; color: #d8c9b8;
+      font-size: 0.92rem; letter-spacing: 0.02em;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      display: block;
+    }
+    .mobile-nav .mnav-tel {
+      color: var(--gold); font-weight: 700; font-size: 1.0rem;
+    }
+    .mobile-nav .mnav-cta {
+      margin: 12px 20px 0;
+      background: var(--gold); color: var(--brown-d);
+      text-align: center; border-radius: 4px;
+      font-weight: 700; padding: 13px 24px;
+      border-bottom: none;
+    }
+
+    /* ===== FV ===== */
+    .fv {
+      position: relative;
+      height: 100svh; min-height: 560px;
+      background-image: url('fv.jpg');
+      background-size: cover;
+      background-position: right center;
+      background-color: #2a1a10;
+      display: flex; align-items: center; justify-content: flex-start;
+    }
+    .fv::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(15, 8, 4, 0.90) 0%,
+        rgba(15, 8, 4, 0.85) 42%,
+        rgba(15, 8, 4, 0.50) 62%,
+        rgba(15, 8, 4, 0.08) 100%
+      );
+    }
+    /* モバイル専用：写真を上部に独立表示するための写真ストリップ */
+    .fv-photo { display: none; }
+    .fv-inner {
+      position: relative;
+      padding: 0 48px 0 5%;
+      max-width: 54vw;
+      text-align: left;
+    }
+    .fv-label {
+      display: inline-block; border: 1px solid var(--gold); color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.78rem; letter-spacing: 0.28em; text-transform: uppercase;
+      padding: 5px 16px; margin-bottom: 28px;
+    }
+    .fv-catch { font-family: 'Noto Serif JP', serif; font-size: clamp(1.5rem,3.5vw,2.4rem); font-weight: 400; color: var(--white); line-height: 1.65; margin-bottom: 20px; letter-spacing: 0.06em; }
+    .fv-catch em { font-style: normal; color: var(--gold); display: block; }
+    .fv-sub { font-size: 0.9rem; color: #d8c9b8; margin-bottom: 28px; line-height: 1.85; }
+    .fv-price {
+      display: inline-block; border: 1px solid rgba(184,147,90,.5);
+      background: rgba(184,147,90,.12); color: #e8d0aa;
+      font-size: 0.85rem; padding: 7px 20px; border-radius: 4px; margin-bottom: 32px;
+    }
+    .fv-btns { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      min-width: 240px; padding: 15px 32px; border-radius: 4px;
+      font-weight: 700; font-size: 0.95rem; transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.88; }
+    .btn--gold    { background: var(--gold); color: var(--brown-d); }
+    .btn--line    { background: var(--green); color: var(--white); }
+    .btn--white   { background: var(--white); color: var(--brown-d); }
+    .btn--outline { border: 2px solid var(--gold); color: var(--gold); }
+    .scroll-hint {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      color: #9a8070; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .scroll-hint::after { content: ''; display: block; width: 1px; height: 36px; background: linear-gradient(to bottom,#9a8070,transparent); }
+
+    /* ===== SECTIONS ===== */
+    .section { padding: 72px 24px; }
+    .section--beige { background: var(--beige); }
+    .inner { max-width: 700px; margin: 0 auto; }
+    .sec-label { font-family: 'Cormorant Garamond', serif; font-size: 0.78rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+    .sec-label::before { content: ''; width: 20px; height: 1px; background: var(--gold); display: block; flex-shrink: 0; }
+    .sec-title { font-family: 'Noto Serif JP', serif; font-size: clamp(1.4rem,3.5vw,1.9rem); font-weight: 700; line-height: 1.45; margin-bottom: 36px; }
+
+    /* ===== WORRIES ===== */
+    .worries { display: grid; gap: 12px; }
+    .worry-item {
+      background: var(--white); border-left: 3px solid var(--gold);
+      padding: 16px 20px; border-radius: 0 8px 8px 0;
+      display: flex; align-items: center; gap: 14px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.05);
+    }
+    .worry-icon {
+      flex-shrink: 0; width: 36px; height: 36px;
+      background: rgba(126,158,132,.18); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .worry-icon svg { width: 18px; height: 18px; fill: var(--brown); }
+    .worry-text { font-size: 0.95rem; font-weight: 600; }
+    .worry-sub  { font-size: 0.82rem; color: var(--sub); margin-top: 2px; }
+    .worries-note {
+      margin-top: 24px; background: var(--brown-d); color: var(--white);
+      border-radius: 8px; padding: 20px 24px; font-size: 0.92rem; line-height: 1.8;
+    }
+    .worries-note strong { color: var(--gold); }
+
+    /* ===== DIFF ===== */
+    .diff-section { background: var(--brown-d); color: var(--white); padding: 72px 24px; }
+    .diff-section .sec-title { color: var(--white); }
+    .diff-subtitle { font-size: 0.9rem; color: #c4a880; margin-bottom: 40px; margin-top: -24px; }
+    .diff-grid { display: grid; gap: 20px; }
+    .diff-card { background: rgba(255,255,255,.06); border: 1px solid rgba(184,147,90,.3); border-radius: 10px; padding: 24px; border-top: 2px solid rgba(184,147,90,.7); }
+    .diff-number { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 600; color: var(--gold); line-height: 1; margin-bottom: 12px; }
+    .diff-title { font-family: 'Noto Serif JP', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+    .diff-body  { font-size: 0.88rem; color: #c4b09a; line-height: 1.85; }
+    .diff-vs { margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.1); font-size: 0.8rem; color: #8a7060; }
+    .diff-vs span { color: #e8a080; }
+
+    /* ===== MENU ===== */
+    .menu-cards { display: grid; gap: 16px; }
+    .menu-card {
+      background: var(--white); border-radius: 10px; padding: 24px;
+      box-shadow: 0 2px 14px rgba(0,0,0,.06); display: flex; gap: 20px; align-items: center;
+      border-top: 3px solid var(--gold);
+    }
+    .menu-badge {
+      flex-shrink: 0; width: 64px; height: 64px; background: var(--beige); border-radius: 50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .menu-badge .min  { font-size: 1.1rem; font-weight: 900; color: var(--brown); line-height: 1; }
+    .menu-badge .unit { font-size: 0.62rem; color: var(--sub); margin-top: 2px; }
+    .menu-info  { flex: 1; min-width: 0; }
+    .menu-name  { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .menu-desc  { font-size: 0.83rem; color: var(--sub); line-height: 1.7; }
+    .menu-price { margin-left: auto; text-align: right; flex-shrink: 0; }
+    .menu-price .price { font-size: 1.35rem; font-weight: 700; color: var(--gold); }
+    .menu-price .tax   { font-size: 0.72rem; color: var(--sub); }
+    .menu-note { margin-top: 16px; font-size: 0.8rem; color: var(--sub); text-align: right; }
+
+    /* ===== ACCESS ===== */
+    .access-rows { display: grid; gap: 0; }
+    .access-row { display: flex; gap: 16px; padding: 15px 0; border-bottom: 1px solid var(--beige-d); align-items: baseline; }
+    .access-row:last-child { border-bottom: none; }
+    .access-label { font-size: 0.72rem; font-weight: 700; letter-spacing: .05em; color: var(--gold); min-width: 68px; flex-shrink: 0; padding-top: 2px; }
+    .access-val { font-size: 0.93rem; }
+    .access-val a { color: var(--brown); text-decoration: underline; text-underline-offset: 3px; }
+    .map-wrap { margin-top: 28px; border-radius: 10px; overflow: hidden; border: 1px solid var(--beige-d); }
+    .map-wrap iframe { width: 100%; height: 220px; border: none; display: block; }
+
+    /* ===== CTA ===== */
+    .cta {
+      position: relative;
+      background-image: url('cta.jpg');
+      background-size: cover;
+      background-position: center;
+      background-color: #2a1a10;
+      color: var(--white); text-align: center; padding: 80px 24px;
+    }
+    .cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(20, 10, 4, 0.80);
+    }
+    .cta .inner { position: relative; }
+    .cta-title { font-family: 'Noto Serif JP', serif; font-size: clamp(1.3rem,3vw,1.7rem); font-weight: 400; letter-spacing: 0.05em; margin-bottom: 12px; }
+    .cta-sub   { font-size: 0.88rem; color: #c4a880; margin-bottom: 36px; line-height: 1.85; }
+    .cta-btns  { display: flex; flex-direction: column; gap: 14px; align-items: center; }
+    .line-note { margin-top: 10px; font-size: 0.75rem; color: #806050; }
+
+    /* ===== FOOTER ===== */
+    footer { background: #160e08; color: #7a6050; text-align: center; padding: 36px 24px; font-size: 0.78rem; }
+    footer .fname { color: var(--white); font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; }
+
+    /* ===== TABLET / DESKTOP ===== */
+    @media (min-width: 600px) {
+      .fv-btns    { flex-direction: row; justify-content: flex-start; }
+      .worries    { grid-template-columns: 1fr 1fr; }
+      .diff-grid  { grid-template-columns: 1fr 1fr; }
+      .menu-cards { grid-template-columns: 1fr 1fr; }
+      .cta-btns   { flex-direction: row; justify-content: center; }
+    }
+
+    /* ===== MOBILE ( ~375px – 599px ) ===== */
+    @media (max-width: 599px) {
+
+      /* --- Header --- */
+      header { padding: 12px 16px; }
+      .header-tel { display: none; }
+      .btn-reserve { font-size: 0.8rem; padding: 8px 14px; }
+      .hamburger { display: flex; }
+
+      /* --- FV : モバイルは写真ゾーン＋テキストゾーンの2段構成 --- */
+      .fv {
+        background-image: none;   /* 背景画像はfv-photoに移動 */
+        background-color: var(--brown-d);
+        height: auto;
+        min-height: 100svh;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        padding-top: 53px;        /* fixed ヘッダー分 */
+      }
+      .fv::before { display: none; }
+      /* 写真エリア：オーバーレイなしで写真をそのまま表示 */
+      .fv-photo {
+        display: block;
+        width: 100%;
+        height: 260px;
+        background-image: url('fv.jpg');
+        background-size: cover;
+        background-position: center 25%;
+        flex-shrink: 0;
+      }
+      /* テキストエリア：ダーク背景で視認性を確保 */
+      .fv-inner {
+        max-width: 100%;
+        width: 100%;
+        background: var(--brown-d);
+        padding: 28px 20px 40px;
+        text-align: center;
+        flex: 1;
+      }
+      .fv-label {
+        font-size: 0.62rem;
+        letter-spacing: 0.10em;
+        padding: 4px 12px;
+        margin-bottom: 16px;
+      }
+      .fv-catch {
+        font-size: clamp(1.2rem, 5.2vw, 1.55rem);
+        margin-bottom: 14px;
+        line-height: 1.7;
+      }
+      .fv-sub {
+        font-size: 0.82rem;
+        margin-bottom: 18px;
+        line-height: 1.8;
+      }
+      .fv-price {
+        display: block;
+        font-size: 0.82rem;
+        padding: 7px 16px;
+        margin-bottom: 22px;
+        text-align: center;
+      }
+      .fv-btns {
+        align-items: stretch;
+        gap: 10px;
+      }
+      .fv-btns .btn {
+        min-width: unset;
+        width: 100%;
+        padding: 14px 16px;
+        font-size: 0.92rem;
+      }
+
+      /* --- Sections --- */
+      .section { padding: 48px 16px; }
+      .diff-section { padding: 48px 16px; }
+      .cta { padding: 60px 16px; }
+
+      /* --- Typography --- */
+      .sec-title { font-size: 1.3rem; margin-bottom: 24px; }
+      .sec-label { font-size: 0.72rem; }
+
+      /* --- Worry items --- */
+      .worries { grid-template-columns: 1fr; }
+      .worry-item { padding: 13px 14px; gap: 12px; }
+      .worry-text { font-size: 0.9rem; }
+      .worry-sub  { font-size: 0.78rem; }
+      .worries-note { padding: 18px 18px; font-size: 0.88rem; }
+
+      /* --- Diff cards --- */
+      .diff-grid { grid-template-columns: 1fr; }
+      .diff-card { padding: 20px 18px; }
+      .diff-subtitle { margin-bottom: 28px; }
+
+      /* --- Menu cards --- */
+      .menu-cards { grid-template-columns: 1fr; }
+      .menu-card {
+        padding: 18px 16px;
+        gap: 12px;
+        flex-wrap: nowrap;
+      }
+      .menu-badge {
+        width: 56px; height: 56px;
+        flex-shrink: 0;
+      }
+      .menu-price {
+        flex-shrink: 0;
+      }
+      .menu-price .price { font-size: 1.2rem; }
+      .menu-desc { font-size: 0.8rem; }
+
+      /* --- Access --- */
+      .access-val { font-size: 0.88rem; }
+      .access-row { padding: 13px 0; }
+      .map-wrap iframe { height: 200px; }
+
+      /* --- CTA --- */
+      .cta-btns {
+        align-items: stretch;
+        gap: 12px;
+        width: 100%;
+      }
+      .cta-btns .btn {
+        min-width: unset;
+        width: 100%;
+        padding: 15px 16px;
+        font-size: 0.92rem;
+      }
+      .cta-sub { font-size: 0.85rem; margin-bottom: 28px; }
+
+      /* --- Footer --- */
+      footer { padding: 28px 16px; font-size: 0.75rem; }
+      footer .fname { font-size: 0.9rem; }
+
+      /* --- Scroll hint --- */
+      .scroll-hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">マッサージ <span>楽～れ</span></div>
+  <div class="header-right">
+    <div class="header-tel">TEL <a href="tel:08023910496">080-2391-0496</a></div>
+    <a href="#cta" class="btn-reserve">ご予約</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" aria-label="モバイルメニュー">
+  <a href="#trouble">お悩み</a>
+  <a href="#why">楽～れの特徴</a>
+  <a href="#menu">メニュー・料金</a>
+  <a href="#access">アクセス</a>
+  <a class="mnav-tel" href="tel:08023910496">電話: 080-2391-0496</a>
+  <a class="mnav-cta" href="#cta">ご予約はこちら</a>
+</nav>
+
+<section class="fv">
+  <div class="fv-photo" role="img" aria-label="施術イメージ写真"></div>
+  <div class="fv-inner">
+    <div class="fv-label">Relaxation Salon Rakuure ｜ 倉敷市玉島</div>
+    <h1 class="fv-catch">
+      肩こり・腰痛、<br>毎日つらくないですか？
+      <em>あなたの体に合わせた、<br>ていねいなほぐし。</em>
+    </h1>
+    <p class="fv-sub">倉敷市玉島のリラクゼーションサロン「楽～れ」。<br>もみほぐし＋ストレッチで、疲れをしっかり解きほぐします。</p>
+    <div class="fv-price">30分 ¥3,000 ／ 60分 ¥5,000（税込）</div>
+    <div class="fv-btns">
+      <a href="tel:08023910496" class="btn btn--white">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        電話で予約する
+      </a>
+      <a href="#cta" class="btn btn--line">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.92 2 10.72c0 2.96 1.56 5.6 4 7.32v2.96l3.36-1.84c.84.24 1.72.36 2.64.36 5.52 0 10-3.92 10-8.72S17.52 2 12 2zm1 12l-2.5-2.68L5.5 14l5.5-5.88L13.5 10.8 18.5 8 13 14z"/></svg>
+        LINEで予約する
+      </a>
+    </div>
+  </div>
+  <div class="scroll-hint">scroll</div>
+</section>
+
+<section class="section" id="trouble">
+  <div class="inner">
+    <p class="sec-label">Trouble</p>
+    <h2 class="sec-title">こんなお悩みはありませんか？</h2>
+    <div class="worries">
+      <div class="worry-item">
+        <div class="worry-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5 5 9c0 2.4 1.1 4.5 2.8 5.9l-.6 5.1h9.6l-.6-5.1C17.9 13.5 19 11.4 19 9c0-4-3-7-7-7z"/></svg></div>
+        <div><div class="worry-text">肩や首のコリがひどい</div><div class="worry-sub">デスクワーク・スマホで慢性化している</div></div>
+      </div>
+      <div class="worry-item">
+        <div class="worry-icon"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 100 10A5 5 0 0012 2zM5 22v-2a7 7 0 0114 0v2H5z"/></svg></div>
+        <div><div class="worry-text">腰痛が仕事中もつらい</div><div class="worry-sub">立ち仕事・座り仕事で腰に負担がかかる</div></div>
+      </div>
+      <div class="worry-item">
+        <div class="worry-icon"><svg viewBox="0 0 24 24"><path d="M13 5.5V2H11v3.5L8 9h8l-3-3.5zM7 11v8c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2v-8H7z"/></svg></div>
+        <div><div class="worry-text">足のだるさ・むくみが取れない</div><div class="worry-sub">帰宅後も疲れが残ったままで眠れない</div></div>
+      </div>
+      <div class="worry-item">
+        <div class="worry-icon"><svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg></div>
+        <div><div class="worry-text">マッサージしてもすぐ戻ってしまう</div><div class="worry-sub">流れ作業では根本から改善できない</div></div>
+      </div>
+    </div>
+    <div class="worries-note">
+      楽～れでは、施術前に<strong>体の状態をしっかりお聞きします</strong>。<br>
+      「今日はここが特につらい」という声に合わせて、もみほぐしとストレッチを<strong>その日の体に合わせて組み合わせる</strong>ので、翌日の軽さが違います。
+    </div>
+  </div>
+</section>
+
+<section class="diff-section" id="why">
+  <div class="inner">
+    <p class="sec-label">Why Rakuure</p>
+    <h2 class="sec-title">なぜ「楽～れ」が<br>選ばれるのか</h2>
+    <p class="diff-subtitle">チェーン店・大手サロンとの違い</p>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-number">01</div>
+        <div class="diff-title">一人ひとりに合わせた<br>オーダーメイド施術</div>
+        <div class="diff-body">毎回同じメニューをこなすだけの流れ作業ではありません。その日の体の状態を聞いてから、最も効果的な施術の組み合わせをご提案します。</div>
+        <div class="diff-vs"><span>チェーン店：</span>マニュアル通りの均一施術</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-number">02</div>
+        <div class="diff-title">もみほぐし＋ストレッチで<br>効果が長続きする</div>
+        <div class="diff-body">もみほぐしだけでは筋肉の緊張が戻りやすい。ストレッチを組み合わせることで可動域が広がり、施術後の軽さが翌日まで続きます。</div>
+        <div class="diff-vs"><span>多くのサロン：</span>もみほぐしのみで終了</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-number">03</div>
+        <div class="diff-title">電話でしっかり<br>相談してから予約できる</div>
+        <div class="diff-body">「初めてで何を選べばいいかわからない」「悩みを伝えておきたい」そんな方はお電話でご相談ください。予約前に不安を解消できます。</div>
+        <div class="diff-vs"><span>大手チェーン：</span>ネット予約のみで相談しにくい</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-number">04</div>
+        <div class="diff-title">倉敷市玉島の<br>完全個人サロン</div>
+        <div class="diff-body">大手に払う広告費や人件費がないぶん、施術の質に集中できます。お客様一人ひとりとじっくり向き合うことが、個人サロンだからこそできることです。</div>
+        <div class="diff-vs"><span>大手チェーン：</span>回転率優先・アルバイトスタッフ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--beige" id="menu">
+  <div class="inner">
+    <p class="sec-label">Menu &amp; Price</p>
+    <h2 class="sec-title">メニュー・料金</h2>
+    <div class="menu-cards">
+      <div class="menu-card">
+        <div class="menu-badge"><span class="min">30</span><span class="unit">分</span></div>
+        <div class="menu-info">
+          <div class="menu-name">もみほぐし＋ストレッチ</div>
+          <div class="menu-desc">仕事帰りにさっとほぐしたい方に。<br>気になる部位を集中的にケア。</div>
+        </div>
+        <div class="menu-price"><div class="price">¥3,000</div><div class="tax">税込</div></div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-badge"><span class="min">60</span><span class="unit">分</span></div>
+        <div class="menu-info">
+          <div class="menu-name">もみほぐし＋ストレッチ</div>
+          <div class="menu-desc">慢性的な疲れ・全身のコリに。<br>ストレッチで可動域もしっかり改善。</div>
+        </div>
+        <div class="menu-price"><div class="price">¥5,000</div><div class="tax">税込</div></div>
+      </div>
+    </div>
+    <p class="menu-note">※ 施術内容はカウンセリング後に調整します。ご不明な点はお電話でご相談ください。</p>
+  </div>
+</section>
+
+<section class="section" id="access">
+  <div class="inner">
+    <p class="sec-label">Access</p>
+    <h2 class="sec-title">アクセス</h2>
+    <div class="access-rows">
+      <div class="access-row"><span class="access-label">住所</span><span class="access-val">岡山県倉敷市玉島1323-1</span></div>
+      <div class="access-row"><span class="access-label">電話</span><span class="access-val"><a href="tel:08023910496">080-2391-0496</a></span></div>
+      <div class="access-row"><span class="access-label">予約方法</span><span class="access-val">お電話 または LINE（準備中）</span></div>
+      <div class="access-row"><span class="access-label">営業時間</span><span class="access-val">10:00〜20:00</span></div>
+      <div class="access-row"><span class="access-label">定休日</span><span class="access-val">不定休（お電話にてご確認ください）</span></div>
+    </div>
+    <div class="map-wrap">
+      <iframe src="https://maps.google.com/maps?q=岡山県倉敷市玉島1323-1&output=embed&hl=ja"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="楽～れ 地図"></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="cta">
+  <div class="inner">
+    <h2 class="cta-title">疲れを溜めすぎる前に、<br>一度来てみてください。</h2>
+    <p class="cta-sub">「どんな施術か聞いてみたいだけ」でも大歓迎です。<br>お電話でご相談いただければ、体の状態に合わせてご案内します。</p>
+    <div class="cta-btns">
+      <a href="tel:08023910496" class="btn btn--white">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        080-2391-0496
+      </a>
+      <a href="#cta" class="btn btn--line">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.92 2 10.72c0 2.96 1.56 5.6 4 7.32v2.96l3.36-1.84c.84.24 1.72.36 2.64.36 5.52 0 10-3.92 10-8.72S17.52 2 12 2zm1 12l-2.5-2.68L5.5 14l5.5-5.88L13.5 10.8 18.5 8 13 14z"/></svg>
+        LINEで予約する（準備中）
+      </a>
+    </div>
+    <p class="line-note">※ LINE予約は近日対応予定です。現在はお電話のみでご予約を承っています。</p>
+  </div>
+</section>
+
+<footer>
+  <p class="fname">マッサージ 楽～れ</p>
+  <p>岡山県倉敷市玉島1323-1　TEL: 080-2391-0496</p>
+  <p style="margin-top:14px;">© 楽～れ All Rights Reserved.</p>
+</footer>
+
+<script>
+  (function () {
+    var hamburger = document.getElementById('hamburger');
+    var mobileNav = document.getElementById('mobile-nav');
+
+    hamburger.addEventListener('click', function () {
+      var isOpen = hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      hamburger.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+    });
+
+    mobileNav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        hamburger.classList.remove('open');
+        mobileNav.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'メニューを開く');
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
